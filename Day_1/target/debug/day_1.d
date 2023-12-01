@@ -1,0 +1,1 @@
+/mnt/f7713ea3-b81e-4f22-8546-403f583ccd1b/Advent\ Of\ Code/AdventOfCode2023/Day_1/target/debug/day_1: /mnt/f7713ea3-b81e-4f22-8546-403f583ccd1b/Advent\ Of\ Code/AdventOfCode2023/Day_1/src/input /mnt/f7713ea3-b81e-4f22-8546-403f583ccd1b/Advent\ Of\ Code/AdventOfCode2023/Day_1/src/main.rs
