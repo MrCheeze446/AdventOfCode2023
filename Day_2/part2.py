@@ -27,7 +27,7 @@ if __name__ == '__main__':
                 red = int(re.findall('\d+', match)[0])
                 colors[0] = red
                 if red > biggestRed:
-                    biggestRed = re
+                    biggestRed = red
             if foundGreen:
                 match = re.findall('\d+ green', currentRound)[0]
                 green = int(re.findall('\d+', match)[0])
