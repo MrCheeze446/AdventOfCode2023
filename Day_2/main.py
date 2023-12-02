@@ -4,39 +4,44 @@ if __name__ == '__main__':
     with open("input", "r") as fileInput:
         inputStrings = fileInput.read()
 
-    red = 12
-    green = 13
-    blue = 14
+    totalRed = 12
+    totalGreen = 13
+    totalBlue = 14
     gameSums = 0
 
-    inputList = inputStrings.splitlines()
-    goodGames = []
+    inputStrings = inputStrings.splitlines()
 
-    for i in range(0, len(inputList)-1):
-        gameID = re.findall(r'\d+', inputList[i])[0]
-        game = inputList[i]
-        game = game[game.find(':'):]
-        game = game.replace(' ', '')
-        game = game.replace(':', '')
-        gameValues = game.split(";")
+    for line in inputStrings:
+        ids = line.split(':')[0]
+        gameID = int(re.findall(r'\d+', line)[0])
+        rounds = line.split(';')
+        invalid = False
+        for currentRound in rounds:
+            colors = [0] * 3
 
-        for valueSet in gameValues:
-            values = valueSet.split(',')
-            invalid = False
-            for value in values:
-                if invalid: break
-                num = re.findall(r'\d+', value)
-                if "green" in value and int(num[0]) >= green:
-                    invalid = True
-                elif "blue" in value and int(num[0]) >= blue:
-                    invalid = True
-                elif "red" in value and int(num[0]) >= red:
-                    invalid = True
-            if not invalid:
-                goodGames.append(int(gameID))
+            foundRed = re.search('\d+ red', currentRound)
+            foundGreen = re.search('\d+ green', currentRound)
+            foundBlue = re.search('\d+ blue', currentRound)
 
+            if foundRed:
+                match = re.findall('\d+ red', currentRound)[0]
+                red = int(re.findall('\d+', match)[0])
+                colors[0] = red
+            if foundGreen:
+                match = re.findall('\d+ green', currentRound)[0]
+                green = int(re.findall('\d+', match)[0])
+                colors[1] = green
+            if foundBlue:
+                match = re.findall('\d+ blue', currentRound)[0]
+                blue = int(re.findall('\d+', match)[0])
+                colors[2] = blue
 
-    for value in goodGames:
-        gameSums += value
+            if colors[0] > totalRed or colors[1] > totalGreen or colors[2] > totalBlue:
+                invalid = True
+                break
+
+        if not invalid:
+            print(gameID)
+            gameSums += gameID
 
     print(gameSums)
